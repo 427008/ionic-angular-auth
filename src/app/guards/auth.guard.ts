@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { AlertController } from '@ionic/angular';
 import { take, map } from 'rxjs/operators';
 
-import { AuthService } from './../services/auth.service';
+import { AuthService } from '../services/auth.service';
 
 @Injectable({
 	providedIn: 'root',
@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
 	// uses auth.service to check if user has token in storage. Returns true if there is a token
 	// returns false if user does not have a token and navigates to initial login page.
 	canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
-		return this.auth.user.pipe(
+		return this.auth.authorizedObs.pipe(
 			take(1),
 			map((user) => {
 				console.log('Can activate: ', user);

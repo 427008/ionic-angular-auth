@@ -23,13 +23,13 @@ export class LoginPage implements OnInit {
 	ngOnInit() {}
 
 	login() {
-		this.auth.login(this.credentials).subscribe(async (res) => {
-			if (res) {
+		this.auth.login(this.credentials).subscribe(async ([success, error]) => {
+			if (success) {
 				this.router.navigateByUrl('/members');
 			} else {
 				const alert = await this.alertCtrl.create({
 					header: 'Login Failed',
-					message: 'User credentials are incorrect',
+					message: error,
 					buttons: ['OK'],
 				});
 				await alert.present();
